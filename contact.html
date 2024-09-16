@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>fashion-website</title>     
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+      
+        <!-- bootstrap css  -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      <!-- own css -->
+   <style>
+    *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    /* mixed  */
+    
+    html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    }
+    
+    body{
+    background-color: #ffeedd;
+    }
+    
+    .review .box, .carousel-item img {
+    max-width: 100%;
+    overflow-x: hidden;
+    }
+    
+    /* Flexbox adjustments */
+    .icon-box {
+    max-width: 100%;
+    }
+    
+    /* Additional safeguard for mobile */
+    @media (max-width: 768px) {
+    .nav-item, .icon-box, .carousel-item img {
+        width: 100%; /* Ensure elements fit within mobile viewport */
+    }
+    }
+    
+/* navbar section  */
+.navbar {
+    background-color: #ffeedd;
+    padding: 0 1.5rem;
+    height: 60px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #765643;
+}
+
+.offcanvas-body a{
+    font-weight: 700;
+}
+
+.nav-item {
+    margin: 0 15px;
+}
+
+.icon-box i{
+    font-size: 1.3rem;
+    margin: 0 10px;
+    color: #765643;
+}
+
+.login-button{
+    background: none;
+    color: #765643;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border: 3px solid #765643;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: 0.3s background-color;
+}
+
+.login-button:hover{
+    background-color: #765643;
+    color: white;
+    border: 3px solid #765643;
+}
+
+.navbar-toggler {
+    border: none;
+    font-size: 1.25rem;
+}
+
+.navbar-toggler:focus, .btn-close:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    transition: background-color 0.3s;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+  width: 0;
+  opacity: 0;
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.form-control.search-input {
+  background: #ffeedd;
+  border: 1px solid #765643;
+  padding: 0;
+}
+
+.search-active .search-input {
+  width: 200px;
+  opacity: 1;
+  padding-left: 10px;
+  padding-right: 30px; /* add some space for the close icon */
+}
+
+.search-icon, .close-icon {
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: #765643;
+}
+
+.close-icon {
+  display: none;
+  margin-left: 10px; /* add some space between the search icon and close icon */
+}
+
+.search-active .close-icon {
+  display: inline;
+}
+
+.search-active .search-icon {
+  display: none;
+}
+
+.search-icon-inside {
+  position: absolute;
+  right: 35px; /* adjust the value to position the icon correctly */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px; /* adjust the font size to your liking */
+  color: #aaa; /* adjust the color to your liking */
+  pointer-events: none; /* prevent the icon from receiving click events */
+  opacity: 0; /* hide the icon by default */
+  transition: opacity 0.2s ease-in-out;
+}
+
+.search-active .search-icon-inside {
+  opacity: 1; /* show the icon when search input is toggled */
+}
+
+#search-results {
+  height: 40px;
+  margin-top: 10px; /* add some space between the search input and results */
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+  display: none; /* hide the results container by default */
+  font-size: 14px; /* adjust the font size to your liking */
+  color: #666; /* adjust the color to your liking */
+}
+.search-results p{
+  margin-bottom: 0;
+}
+  
+@media (min-width: 991px) {
+.nav-link::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #473428;
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+.nav-link:hover::before, .nav-link.active::before{
+    width: 100%;
+    visibility: visible;
+  }
+}
+
+@media (max-width: 768px) {
+.icon-box {
+    width: 35px;
+    height: 35px;
+}
+.search-icon, .close-icon {
+    font-size: 1rem;
+}
+}
+
+.nav-link{
+    color: #765643;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active{
+    color: #473428;
+}
+
+/* Account Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    padding: 10px;
+}
+
+.dropdown-item {
+    color: #473428;
+}
+
+.dropdown-item:hover {
+    background-color: #ffeedd;
+}
+
+  /* contact section */
+.card{
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0px 0px 25px rgb(241, 180, 180);
+    background-color: #ffeedd;
+}
+.card-img-top{
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px rgb(236, 117, 117);
+}
+.card h2{
+    font-family: serif;
+    font-weight: 700;
+    color: brown;
+    border-bottom: 2px solid brown;
+}
+
+.card p{
+    font-family: cursive;
+    font-size: 20px;
+    color: rgb(218, 166, 98);
+}
+
+.card .btn-success{
+    border-radius: 10px;
+    width: 100%;
+}
+
+.card .form-control{
+    height: 55px;
+    border-radius: 7px;
+    background-color: #e5e5e5;
+}
+
+.card .form-label{
+    font-family: serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: brown;
+}
+  
+.card .carousel-item img {
+    height: 90vh;
+    object-fit: cover;
+    width: 100%;
+}
+
+.card i{
+    margin-left: 20px;
+}
+
+.card .map{
+    font-size: 15px;
+}
+  
+.card .title{
+    font-size: 17px;
+    font-family: none;
+    color: black;
+}
+  
+  /* footer section  */
+  .foot .footer .row{
+      margin-top: 30px;
+      --bs-gutter-x: 8rem;
+  }
+  
+  @media (max-width: 991px) {
+      .foot .footer .row{
+          --bs-gutter-x: 12rem;
+      }
+  }
+     </style>
+    </head>
+<body>
+    <!-- navbar starts  -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-center flex-grow-1 pe-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="collection.html">Collections</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+
+                <!-- Login Button (will be replaced after login) -->
+                <a href="login.html" class="btn login-button" id="loginButton">Login</a>
+
+                <!-- Account Icon with Dropdown (hidden initially) -->
+                <div class="dropdown d-none" id="accountDropdown">
+                    <a href="#" class="icon-box" id="accountIcon" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountIcon">
+                        <li><a class="dropdown-item" href="profile.html"><i class="fa-solid fa-circle-user" style="margin-right: 10px;"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="account.html"><i class="fa-solid fa-house-user" style="margin-right: 10px;"></i>Account</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-boxes-packing" style="margin-right: 10px;"></i>Orders</a></li>
+                        <li><a class="dropdown-item" href="wishlist.html"><i class="fa-solid fa-heart" style="margin-right: 10px;"></i>Wishlist</a></li>
+                        <li><a class="dropdown-item" href="cart.html"><i class="fa-solid fa-cart-flatbed" style="margin-right: 10px;"></i>Cart</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear" style="margin-right: 10px;"></i>Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="userLogout()">Logout</a></li>
+                    </ul>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center">
+                    <!-- Search -->
+                    <div class="d-flex align-items-center search-container me-1">
+                      <i class="fas fa-search search-icon" onclick="toggleSearch()"></i>
+                      <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" id="search-input">
+                      <i class="fas fa-times close-icon ms-2" onclick="toggleSearch()"></i>
+                      <i class="fas fa-search search-icon-inside" aria-hidden="true"></i>
+                    </div>
+
+                    <!-- Wishlist -->
+                    <div class="icon-box">
+                        <a href="wishlist.html"><i class="fa-solid fa-heart"></i></a>
+                    </div>
+                    <!-- Cart -->
+                    <div class="icon-box">
+                        <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="search-results" id="search-results"></div>
+
+  <!-- navbar ends  -->
+
+<!-- new section -->
+<section class="bg-section">
+    <div class="container py-3">
+        <h2 class="text-center" style="color: brown; font-weight: 700;">HOW CAN I HELP YOU</h2>
+        <p class="text-center" style="font-size: 18px;">We are always there for our customers and we have best telecaller for answering your querys. if you have any problem from our products please submit the 'get in touch form' and our team member will call you within a 5 minutes</p>
+<!-- 1st card -->
+        <div class="row g-4 py-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <h2 class="text-center">ADVERTISEMENT</h2>
+                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active" data-bs-interval="3000">
+                            <img src="img/banner1.jpg" class="d-block" alt="...">
+                          </div>
+                          <div class="carousel-item" data-bs-interval="3000">
+                            <img src="img/banner2.jpg" class="d-block" alt="...">
+                          </div>
+                          <div class="carousel-item" data-bs-interval="3000">
+                            <img src="img/banner3.jpg" class="d-block" alt="...">
+                          </div>
+                          <div class="carousel-item" data-bs-interval="3000">
+                            <img src="img/banner4.jpg" class="d-block" alt="...">
+                          </div>
+                        </div>
+                      </div>
+                    <div class="card-body">
+                        <p>Today is very big day for you because we are selling our products with reasonble price. so, hurry up and grab our best products.</p>
+                    </div>
+                </div>
+            </div>
+<!-- 2nd card -->
+            <div class="col-md-5">
+                <div class="card">
+                    <h2>GET IN TOUCH</h2>
+                    <p>Submit this form very carefully, if you put wrong data our team member can not call you or answering your querys</p>
+                    <div class="mb-3">
+                        <form action="">
+                        <label class="form-label" >YOUR NAME</label>
+                        <input type="text" class="form-control" name="name" placeholder="enter your name" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">YOUR EMAIL</label>
+                        <input type="email" class="form-control" name="email" placeholder="enter your email" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">YOUR MOBILE NO.</label>
+                        <input type="number" class="form-control" name="phone"  placeholder="enter your mobile no." required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">QUERY BOX</label>
+                        <textarea class="form-control" name="querybox" placeholder="Write your query" required></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <input type="submit" style="background-color: #765643; border: 1px solid white;" class="btn btn-success" value="submit">
+                      </div>
+                    </form>  
+                </div>
+            </div>
+        </div>
+<!-- 3rd card -->
+        <div class="row g-4 py-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <h2 class="text-center">SOCIAL-MEDIAS</h2>
+                    <p>Now we are in all social medias for your support.</p>
+                    <div class="card-title">
+                    <i class="fab fa-facebook-square fa-3x"></i>
+                    <i class="fab fa-instagram-square fa-3x"></i>
+                    <i class="fab fa-twitter-square fa-3x"></i>
+                    <i class="fab fa-whatsapp-square fa-3x"></i>
+                    <i class="fab fa-square-pinterest fa-3x"></i>
+                    <h2></h2>
+                    </div>
+                    <div class="card-title">
+                     <i class="fa fa-phone">:- 0338017586932 (toll free)</i>     
+                    </div>
+                </div>
+            </div>
+<!-- 4th card -->
+            <div class="col-md-6">
+                <div class="card">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.25871723816!2d88.43306897260564!3d22.569425033091843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02751b1eceec61%3A0x7cfb46659319d2cb!2sEuphoria%20GenX%20%7C%20Summer%20%26%20Winter%20Training%20%7C%20Job%20Oriented%20Training!5e0!3m2!1sen!2sin!4v1724994729520!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <p class="map" style="margin-top: 20px; color: brown; font-family: Arial, Helvetica, sans-serif; font-size: 18px;">Netguru Building, PlotNo. E2-4 1st Floor, GP Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <!-- footer starts  -->
+
+  <section class="foot" style="margin-top: 10rem; border-top: 1px solid black;">
+    <footer class="footer">
+      <div class="d-flex justify-content-center my-4" style="margin: 30px 120px;">
+        <div class="row">
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" style="text-align: left;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #765643;">Welcome to Cruella</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="account.html" style="color: #333; text-decoration: none;">Your Account</a></li>
+              <li><a href="wishlist.html" style="color: #333; text-decoration: none;">Your Wishlist</a></li>
+              <li><a href="collection.html" style="color: #333; text-decoration: none;">Our Collections</a></li>
+              <li><a href="about.html" style="color: #333; text-decoration: none;">About Us</a></li>
+              <li><a href="cart.html" style="color: #333; text-decoration: none;">Your Cart</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" style="text-align: left;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #765643;">Contact Us</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="mailto:support@email.com" style="color: #333; text-decoration: none;">Support: support@cruella.com</a></li>
+              <li><a href="mailto:legal.example@email.com" style="color: #333; text-decoration: none;">Legal: legal.india@cruella.com</a></li>
+              <li><a href="mailto:press.example@emailc.com" style="color: #333; text-decoration: none;">Press: press.india@cruella.com</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" style="text-align: left;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #765643;">Help</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="#" style="color: #333; text-decoration: none;">Payment Methods</a></li>
+              <li><a href="#" style="color: #333; text-decoration: none;">Shipping & Delivery</a></li>
+              <li><a href="#" style="color: #333; text-decoration: none;">Return Policy</a></li>
+              <li><a href="#" style="color: #333; text-decoration: none;">Cookies Settings</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" style="text-align: left;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #765643;">Policies</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="#" style="color: #333; text-decoration: none;">Terms & Conditions</a></li>
+              <li><a href="#" style="color: #333; text-decoration: none;">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80" style="margin: 0 120px;">
+                    <div class="social-media">
+                        <a href="#" class="text-dark" style="font-size: 1.5rem; padding: 0 1rem;"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                    <div class="social-media">
+                        <a href="#" class="text-dark" style="font-size: 1.5rem; padding: 0 1rem;"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                    <div class="social-media">
+                        <a href="#" class="text-dark" style="font-size: 1.5rem; padding: 0 1rem;"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80" style="gap: 2rem;">
+                    <a href="https://play.google.com/store/games"><img src="https://static.vecteezy.com/system/resources/previews/012/871/364/original/google-play-store-download-button-in-white-colors-download-on-the-google-play-store-free-png.png" alt="Google Play" class="img-fluid" style="width: 120px; height: 48px;"></a> 
+                    <a href="https://www.apple.com/app-store/"><img src="https://static.vecteezy.com/system/resources/previews/012/871/374/non_2x/app-store-download-button-in-white-colors-download-on-the-apple-app-store-free-png.png" alt="App Store" class="img-fluid" style="width: 120px; height: 48px;"></a> 
+                </div>
+            </div>
+    
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80">
+                    <div class="footer-logo">
+                        <h2 style="font-size: 24px; font-weight: 700; margin: 20px 0; color: #765643;">Cruella</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80">
+                    <div class="footer-bottom">
+                        <p class="title">Cruella London, 119 Marylebone Road, London, United Kingdom. | Copyright © Cruella (LONDON) | All rights reserved</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80">
+                    <div class="payment-methods">
+                        <img src="https://logolook.net/wp-content/uploads/2021/07/Mastercard-Logo-2016.png" alt="MasterCard" class="img-fluid" style="width: 40px; height: 23px;">
+                        <img src="https://th.bing.com/th/id/OIP.vrFFSCnWdpjDGPTPzOUwPAAAAA?rs=1&pid=ImgDetMain" alt="Visa" class="img-fluid" style="width: 40px; height: 20px;">
+                        <img src="https://www.jaxkarwash.com/new-wp/wp-content/uploads/2022/12/amex-300x207.png" alt="Amex" class="img-fluid" style="width: 40px; height: 23px;">
+                        <img src="https://lh3.googleusercontent.com/-YzpTb49zJyk/WGZJLYb3LKI/AAAAAAAABUw/3M-C-rrzpJU/s1600/BHIM-app-for-cashless-payments.-1.jpg" alt="BHIM" class="img-fluid" style="width: 40px; height: 28px;">
+                        <img src="https://th.bing.com/th/id/OIP.vJ01x9JQKLXsRdUHsTATugAAAA?rs=1&pid=ImgDetMain" alt="RuPay" class="img-fluid" style="width: 40px; height: 23px;">
+                        <img src="https://4.bp.blogspot.com/-q6y47-W3Z4k/W1Y2Oh6ixiI/AAAAAAAAAag/wsbpDCXTbkMDrzOlZRAlqN5hWMC1UTXfwCPcBGAYYCw/s1600/paytm.jpg" alt="Paytm" class="img-fluid" style="width: 40px; height: 26px;">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/netbanking-credit-debit-card-bank-transaction-32302.png" alt="NetBanking" class="img-fluid" style="width: 40px; height: 40px;">
+                        <img src="https://review6.com/wp-content/uploads/2024/05/pd78QJrCn0hGwdUyLdbeHQPMzHeLvBZkjKsmofaC.jpeg" alt="UPI" class="img-fluid" style="width: 40px; height: 12px;">
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+<!-- footer ends  -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  <!-- custom js -->
+  <script>
+    function toggleSearch() {
+    const searchContainer = document.querySelector('.search-container');
+    searchContainer.classList.toggle('search-active');
+  }
+  
+  const items = [
+    { name: 'Item 1', anchor: '#item-1' },
+    { name: 'Item 2', anchor: '#item-2' },
+    { name: 'Item 3', anchor: '#item-3' },
+    { name: 'Item 4', anchor: '#item-4' },
+    { name: 'Item 5', anchor: '#item-5' },
+    // Add more items to the array
+  ];
+  
+  document.getElementById('search-input').addEventListener('input', searchItems);
+  
+  function searchItems() {
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    const searchResults = document.getElementById('search-results');
+  
+    let results = [];
+  
+    items.forEach(item => {
+      if (item.name.toLowerCase().includes(searchTerm)) {
+        results.push(item);
+      }
+    });
+  
+    if (results.length === 0) {
+      searchResults.innerHTML = '<p>No results found for "' + searchTerm + '".</p>';
+      searchResults.style.display = 'block';
+    } else {
+      searchResults.style.display = 'none';
+    }
+  }
+  
+  document.getElementById('search-input').addEventListener('keyup', function(event) {
+    if (event.key === 'Escape') {
+      document.getElementById('search-input').value = '';
+      document.getElementById('search-results').style.display = 'none';
+    }
+  });
+
+
+/*   // for api use
+
+// Add event listener to search input
+document.getElementById('search-input').addEventListener('input', searchItems);
+
+function searchItems() {
+  const searchInput = document.getElementById('search-input');
+  const searchTerm = searchInput.value.trim();
+  const searchResults = document.getElementById('search-results'); // Add a div with this ID to display results
+
+  if (searchTerm !== '') {
+    // Make an API call to search for the item (replace with your actual API endpoint)
+    fetch('/api/search', {
+      method: 'GET',
+      params: { query: searchTerm }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.length === 0) {
+        // Display "No results found" message
+        searchResults.innerHTML = '<p>No results found for "' + searchTerm + '".</p>';
+      } else {
+        // Display search results
+        searchResults.innerHTML = '';
+        data.forEach(item => {
+          const resultHTML = '<p>' + item.name + '</p>';
+          searchResults.insertAdjacentHTML('beforeend', resultHTML);
+        });
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  } else {
+    searchResults.innerHTML = ''; // Clear results when search input is empty
+  }
+} 
+  
+*/
+
+  // Check login state on page load
+  document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (isLoggedIn === 'true') {
+          document.getElementById('loginButton').classList.add('d-none');
+          document.getElementById('accountDropdown').classList.remove('d-none');
+      }
+  });
+
+  // Simulate user logout
+  function userLogout() {
+      // Set login state to false
+      localStorage.setItem('isLoggedIn', 'false');
+      // Show the login button
+      document.getElementById('loginButton').classList.remove('d-none');
+      // Hide the account dropdown
+      document.getElementById('accountDropdown').classList.add('d-none');
+  }
+</script>
+
+ <script>
+  const moreBtn = document.getElementById('more-btn');
+    // Add an event listener to the button
+    moreBtn.addEventListener('click', () => {
+      // Redirect to another page when the button is clicked
+      window.location.href = 'collection.html';
+    });
+</script>
+</body>
+</html>

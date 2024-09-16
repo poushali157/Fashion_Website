@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+   
+    <!-- own css  -->
+   <style>
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* mixed  */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body{
+    background-color: #ffeedd;
+}
+
+ .review .box, .carousel-item img {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Flexbox adjustments */
+ .icon-box {
+    max-width: 100%;
+}
+
+/* Additional safeguard for mobile */
+@media (max-width: 768px) {
+    .nav-item, .icon-box, .carousel-item img {
+        width: 100%; /* Ensure elements fit within mobile viewport */
+    }
+}
+
+/* navbar section  */
+.navbar {
+    background-color: #ffeedd;
+    padding: 0 1.5rem;
+    height: 60px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #765643;
+}
+
+.offcanvas-body a{
+    font-weight: 700;
+}
+
+.nav-item {
+    margin: 0 15px;
+}
+
+.icon-box i{
+    font-size: 1.3rem;
+    margin: 0 10px;
+    color: #765643;
+}
+
+.login-button{
+    background: none;
+    color: #765643;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border: 3px solid #765643;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: 0.3s background-color;
+}
+
+.login-button:hover{
+    background-color: #765643;
+    color: white;
+    border: 3px solid #765643;
+}
+
+.navbar-toggler {
+    border: none;
+    font-size: 1.25rem;
+}
+
+.navbar-toggler:focus, .btn-close:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    transition: background-color 0.3s;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+  width: 0;
+  opacity: 0;
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.form-control.search-input {
+  background: #ffeedd;
+  border: 1px solid #765643;
+  padding: 0;
+}
+
+.search-active .search-input {
+  width: 200px;
+  opacity: 1;
+  padding-left: 10px;
+  padding-right: 30px; /* add some space for the close icon */
+}
+
+.search-icon, .close-icon {
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: #765643;
+}
+
+.close-icon {
+  display: none;
+  margin-left: 10px; /* add some space between the search icon and close icon */
+}
+
+.search-active .close-icon {
+  display: inline;
+}
+
+.search-active .search-icon {
+  display: none;
+}
+
+.search-icon-inside {
+  position: absolute;
+  right: 35px; /* adjust the value to position the icon correctly */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px; /* adjust the font size to your liking */
+  color: #aaa; /* adjust the color to your liking */
+  pointer-events: none; /* prevent the icon from receiving click events */
+  opacity: 0; /* hide the icon by default */
+  transition: opacity 0.2s ease-in-out;
+}
+
+.search-active .search-icon-inside {
+  opacity: 1; /* show the icon when search input is toggled */
+}
+
+#search-results {
+  height: 40px;
+  margin-top: 10px; /* add some space between the search input and results */
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+  display: none; /* hide the results container by default */
+  font-size: 14px; /* adjust the font size to your liking */
+  color: #666; /* adjust the color to your liking */
+}
+.search-results p{
+  margin-bottom: 0;
+}
+  
+@media (min-width: 991px) {
+    .nav-link::before{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background-color: #473428;
+        visibility: hidden;
+        transition: 0.3s ease-in-out;
+    }
+
+    .nav-link:hover::before, .nav-link.active::before{
+        width: 100%;
+        visibility: visible;
+    }
+}
+
+@media (max-width: 768px) {
+    .icon-box {
+        width: 35px;
+        height: 35px;
+    }
+    .search-icon, .close-icon {
+        font-size: 1rem;
+    }
+}
+
+.nav-link{
+    color: #765643;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active{
+    color: #473428;
+}
+
+/* Account Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    padding: 10px;
+}
+
+.dropdown-item {
+    color: #473428;
+}
+
+.dropdown-item:hover {
+    background-color: #ffeedd;
+}
+
+/* nav close  */
+
+        .about h2 {
+            color: #765643; 
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background-color: #765643; 
+            border-color: black;
+        }
+
+        .btn-primary:hover {
+            background-color: #643c24; 
+        }
+
+        .quote {
+            background-color: #343a40;
+            color: black; 
+        }
+
+        .blockquote-footer {
+            color: #ffc107; 
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .team h2 {
+            color: #765643;
+            font-weight: 700;
+        }
+
+        .testimonials .testimonial p {
+            color: #765643; 
+            font-size: 20px;
+        }
+
+/* footer section  */
+.foot .footer .row{
+    margin-top: 30px;
+    --bs-gutter-x: 8rem;
+}
+
+@media (max-width: 991px) {
+    .foot .footer .row{
+        --bs-gutter-x: 12rem;
+    }
+}
+
+/* footer ends */
+
+        .btn-secondary {
+            background-color: #765643;
+        }
+
+        .btn-secondary:hover {
+            background-color: #643c24;
+        }
+    </style>
+</head>
+<body>
+    <!-- navbar starts  -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-center flex-grow-1 pe-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="collection.html">Collections</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">About</a>
+                    </li>
+                </ul>
+
+                <!-- Login Button (will be replaced after login) -->
+                <a href="login.html" class="btn login-button" id="loginButton">Login</a>
+
+                <!-- Account Icon with Dropdown (hidden initially) -->
+                <div class="dropdown d-none" id="accountDropdown">
+                    <a href="#" class="icon-box" id="accountIcon" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountIcon">
+                        <li><a class="dropdown-item" href="profile.html"><i class="fa-solid fa-circle-user" style="margin-right: 10px;"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="account.html"><i class="fa-solid fa-house-user" style="margin-right: 10px;"></i>Account</a></li>
+                        <li><a class="dropdown-item" href=""><i class="fa-solid fa-boxes-packing" style="margin-right: 10px;"></i>Orders</a></li>
+                        <li><a class="dropdown-item" href="wishlist.html"><i class="fa-solid fa-heart" style="margin-right: 10px;"></i>Wishlist</a></li>
+                        <li><a class="dropdown-item" href="cart.html"><i class="fa-solid fa-cart-flatbed" style="margin-right: 10px;"></i>Cart</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear" style="margin-right: 10px;"></i>Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="userLogout()">Logout</a></li>
+                    </ul>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center">
+                    <!-- Search -->
+                    <div class="d-flex align-items-center search-container me-1">
+                      <i class="fas fa-search search-icon" onclick="toggleSearch()"></i>
+                      <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" id="search-input">
+                      <i class="fas fa-times close-icon ms-2" onclick="toggleSearch()"></i>
+                      <i class="fas fa-search search-icon-inside" aria-hidden="true"></i>
+                    </div>
+
+                    <!-- Wishlist -->
+                    <div class="icon-box">
+                        <a href="wishlist.html"><i class="fa-solid fa-heart"></i></a>
+                    </div>
+                    <!-- Cart -->
+                    <div class="icon-box">
+                        <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="search-results" id="search-results"></div>
+
+  <!-- navbar ends  -->
+
+    <section class="about py-5">
+        <div class="container">
+            <h1 class="text-center mb-4" style="font-weight: 700;">About Us</h1>
+            <div class="row">
+                <div class="col-md-6" style="margin-top: 20px;">
+                    <h2>Welcome! We're here to assist you with any questions you may have</h2>
+                    <p style="text-align: justify;">At Minios, we believe the ultimate expression of product and customer experience is reflected in a global world of fashion. Speaking to a mindful audience, we are always inspired by the world of Minios, providing a versatile experience for the perfect balance of style and comfort. Lightweight, breathable, and carefully curated fabrics make each Minios piece unique. We create trendy yet timeless essentials that are treasured for lasting quality. Shop with us to express your own true style and embrace your mood. Vogue is here to make women bold, chic, and confident. Explore our fashion-forward apparel collection at Vogue.</p>
+                    <a href="about2.html" class="btn btn-primary mt-3">Read More</a>
+                </div>
+                <div class="col-md-6 text-center" style="margin-top: 20px;">
+                    <img src="https://i.pinimg.com/236x/54/73/c4/5473c4b8d57c500396b88aeddda538d5.jpg" class="img-fluid rounded" alt="Fashion Model">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote bg-light py-5">
+        <div class="container">
+            <blockquote class="blockquote text-center">
+                <p class="mb-0">Style Redefined: fashion receives rave reviews for its curated fashions, blending trends and comfort, a wardrobe revelation.</p>
+                <footer class="blockquote-footer mt-3">Vogue's Column</footer>
+            </blockquote>
+        </div>
+    </section>
+
+    <section class="team py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Meet Our Team</h2>
+            <div class="row text-center">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <img src="https://i.pinimg.com/236x/71/e5/63/71e563b3c2839eafd3bad0eae1694b48.jpg" class="img-fluid rounded-circle mb-3" alt="Fashion Editor">
+                    <p>Fashion Editor</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <img src="https://i.pinimg.com/236x/87/68/41/876841ccfbabf42743e40c09e4d6d31d.jpg" class="img-fluid rounded-circle mb-3" alt="Stylist">
+                    <p>Stylist</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <img src="https://i.pinimg.com/236x/16/ab/ea/16abeacff7cc44984ba9512730b8be3a.jpg" class="img-fluid rounded-circle mb-3" alt="Creative Director">
+                    <p>Creative Director</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <img src="https://i.pinimg.com/236x/a7/df/12/a7df1252425d345de3c2502b7f87984b.jpg" class="img-fluid rounded-circle mb-3" alt="Photographer">
+                    <p>Photographer</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="member.html" class="btn btn-secondary">More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">What They Say About Us</h2>
+            <div class="testimonial text-center">
+                <img src="https://i.pinimg.com/564x/80/98/b0/8098b04c74b2158e527d85f702b39a6f.jpg" class="img-fluid rounded-circle mb-3" alt="Happy Customer">
+                <p class="font-weight-bold">Adoration For Trendy Elegance</p>
+                <p>"I am absolutely in love with the stylish collections at fashion. The designs are both trendy and elegant, making it easy to stay at the forefront of fashion."</p>
+                <p><strong>- Emily</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer starts  -->
+
+<section class="foot" style="margin-top: 10rem; border-top: 1px solid black;">
+    <footer class="footer">
+      <div class="d-flex justify-content-center my-4" style="margin: 30px 120px;">
+        <div class="row">
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" style="text-align: left;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #765643;">Welcome to Cruella</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="account.html" style="color: #333; text-decoration: none;">Your Account</a></li>
+              <li><a href="wishlist.html" style="color: #333; text-decoration: none;">Your Wishlist</a></li>
+              <li><a href="collection.html" style="color: #333; text-decoration: none;">Our Collections</a></li>
+              <li><a href="about.html" style="color: #333; text-decoration: none;">About Us</a></li>
+              <li><a href="cart.html" style="color: #333; text-decoration: none;">Your Cart</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" style="text-align: left;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #765643;">Contact Us</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="mailto:support@email.com" style="color: #333; text-decoration: none;">Support: support@cruella.com</a></li>
+              <li><a href="mailto:legal.example@email.com" style="color: #333; text-decoration: none;">Legal: legal.india@cruella.com</a></li>
+              <li><a href="mailto:press.example@emailc.com" style="color: #333; text-decoration: none;">Press: press.india@cruella.com</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" style="text-align: left;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #765643;">Help</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="#" style="color: #333; text-decoration: none;">Payment Methods</a></li>
+              <li><a href="#" style="color: #333; text-decoration: none;">Shipping & Delivery</a></li>
+              <li><a href="#" style="color: #333; text-decoration: none;">Return Policy</a></li>
+              <li><a href="#" style="color: #333; text-decoration: none;">Cookies Settings</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" style="text-align: left;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #765643;">Policies</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="#" style="color: #333; text-decoration: none;">Terms & Conditions</a></li>
+              <li><a href="#" style="color: #333; text-decoration: none;">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80" style="margin: 0 120px;">
+                    <div class="social-media">
+                        <a href="#" class="text-dark" style="font-size: 1.5rem; padding: 0 1rem;"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                    <div class="social-media">
+                        <a href="#" class="text-dark" style="font-size: 1.5rem; padding: 0 1rem;"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                    <div class="social-media">
+                        <a href="#" class="text-dark" style="font-size: 1.5rem; padding: 0 1rem;"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80" style="gap: 2rem;">
+                    <a href="#"><img src="https://static.vecteezy.com/system/resources/previews/012/871/364/original/google-play-store-download-button-in-white-colors-download-on-the-google-play-store-free-png.png" alt="Google Play" class="img-fluid" style="width: 120px; height: 48px;"></a> 
+                    <a href="#"><img src="https://static.vecteezy.com/system/resources/previews/012/871/374/non_2x/app-store-download-button-in-white-colors-download-on-the-apple-app-store-free-png.png" alt="App Store" class="img-fluid" style="width: 120px; height: 48px;"></a> 
+                </div>
+            </div>
+    
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80">
+                    <div class="footer-logo">
+                        <h2 style="font-size: 24px; font-weight: 700; margin: 20px 0; color: #765643;">Cruella</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80">
+                    <div class="footer-bottom">
+                        <p>Cruella London, 119 Marylebone Road, London, United Kingdom. | Copyright © Cruella (LONDON) | All rights reserved</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="d-flex justify-content-center my-4">
+                <div class="d-flex align-items-center justify-content-evenly w-80">
+                    <div class="payment-methods">
+                        <img src="https://logolook.net/wp-content/uploads/2021/07/Mastercard-Logo-2016.png" alt="MasterCard" class="img-fluid" style="width: 40px; height: 23px;">
+                        <img src="https://th.bing.com/th/id/OIP.vrFFSCnWdpjDGPTPzOUwPAAAAA?rs=1&pid=ImgDetMain" alt="Visa" class="img-fluid" style="width: 40px; height: 20px;">
+                        <img src="https://www.jaxkarwash.com/new-wp/wp-content/uploads/2022/12/amex-300x207.png" alt="Amex" class="img-fluid" style="width: 40px; height: 23px;">
+                        <img src="https://lh3.googleusercontent.com/-YzpTb49zJyk/WGZJLYb3LKI/AAAAAAAABUw/3M-C-rrzpJU/s1600/BHIM-app-for-cashless-payments.-1.jpg" alt="BHIM" class="img-fluid" style="width: 40px; height: 28px;">
+                        <img src="https://th.bing.com/th/id/OIP.vJ01x9JQKLXsRdUHsTATugAAAA?rs=1&pid=ImgDetMain" alt="RuPay" class="img-fluid" style="width: 40px; height: 23px;">
+                        <img src="https://4.bp.blogspot.com/-q6y47-W3Z4k/W1Y2Oh6ixiI/AAAAAAAAAag/wsbpDCXTbkMDrzOlZRAlqN5hWMC1UTXfwCPcBGAYYCw/s1600/paytm.jpg" alt="Paytm" class="img-fluid" style="width: 40px; height: 26px;">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/netbanking-credit-debit-card-bank-transaction-32302.png" alt="NetBanking" class="img-fluid" style="width: 40px; height: 40px;">
+                        <img src="https://review6.com/wp-content/uploads/2024/05/pd78QJrCn0hGwdUyLdbeHQPMzHeLvBZkjKsmofaC.jpeg" alt="UPI" class="img-fluid" style="width: 40px; height: 12px;">
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+  
+    <!-- footer ends  -->
+
+    <!-- custom js -->
+  <script>
+    function toggleSearch() {
+    const searchContainer = document.querySelector('.search-container');
+    searchContainer.classList.toggle('search-active');
+  }
+  
+  const items = [
+    { name: 'Item 1', anchor: '#item-1' },
+    { name: 'Item 2', anchor: '#item-2' },
+    { name: 'Item 3', anchor: '#item-3' },
+    { name: 'Item 4', anchor: '#item-4' },
+    { name: 'Item 5', anchor: '#item-5' },
+    // Add more items to the array
+  ];
+  
+  document.getElementById('search-input').addEventListener('input', searchItems);
+  
+  function searchItems() {
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    const searchResults = document.getElementById('search-results');
+  
+    let results = [];
+  
+    items.forEach(item => {
+      if (item.name.toLowerCase().includes(searchTerm)) {
+        results.push(item);
+      }
+    });
+  
+    if (results.length === 0) {
+      searchResults.innerHTML = '<p>No results found for "' + searchTerm + '".</p>';
+      searchResults.style.display = 'block';
+    } else {
+      searchResults.style.display = 'none';
+    }
+  }
+  
+  document.getElementById('search-input').addEventListener('keyup', function(event) {
+    if (event.key === 'Escape') {
+      document.getElementById('search-input').value = '';
+      document.getElementById('search-results').style.display = 'none';
+    }
+  });
+
+
+/*   // for api use
+
+// Add event listener to search input
+document.getElementById('search-input').addEventListener('input', searchItems);
+
+function searchItems() {
+  const searchInput = document.getElementById('search-input');
+  const searchTerm = searchInput.value.trim();
+  const searchResults = document.getElementById('search-results'); // Add a div with this ID to display results
+
+  if (searchTerm !== '') {
+    // Make an API call to search for the item (replace with your actual API endpoint)
+    fetch('/api/search', {
+      method: 'GET',
+      params: { query: searchTerm }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.length === 0) {
+        // Display "No results found" message
+        searchResults.innerHTML = '<p>No results found for "' + searchTerm + '".</p>';
+      } else {
+        // Display search results
+        searchResults.innerHTML = '';
+        data.forEach(item => {
+          const resultHTML = '<p>' + item.name + '</p>';
+          searchResults.insertAdjacentHTML('beforeend', resultHTML);
+        });
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  } else {
+    searchResults.innerHTML = ''; // Clear results when search input is empty
+  }
+} 
+  
+*/
+
+  // Check login state on page load
+  document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (isLoggedIn === 'true') {
+          document.getElementById('loginButton').classList.add('d-none');
+          document.getElementById('accountDropdown').classList.remove('d-none');
+      }
+  });
+
+  // Simulate user logout
+  function userLogout() {
+      // Set login state to false
+      localStorage.setItem('isLoggedIn', 'false');
+      // Show the login button
+      document.getElementById('loginButton').classList.remove('d-none');
+      // Hide the account dropdown
+      document.getElementById('accountDropdown').classList.add('d-none');
+  }
+</script>
+
+    <!-- js  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

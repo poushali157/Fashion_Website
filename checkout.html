@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>orders</title>
+<!-- font-ws css  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- bootstrap css  -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<!-- other css  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<style>
+   *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* mixed  */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body{
+    background-color: #ffeedd;
+}
+
+ .review .box, .carousel-item img {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Flexbox adjustments */
+ .icon-box {
+    max-width: 100%;
+}
+
+/* Additional safeguard for mobile */
+@media (max-width: 768px) {
+    .nav-item, .icon-box, .carousel-item img {
+        width: 100%; /* Ensure elements fit within mobile viewport */
+    }
+}
+
+/* navbar section  */
+.navbar {
+    background-color: #ffeedd;
+    padding: 0 1.5rem;
+    height: 60px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #765643;
+}
+
+.offcanvas-body a{
+    font-weight: 700;
+}
+
+.nav-item {
+    margin: 0 15px;
+}
+
+.icon-box i{
+    font-size: 1.3rem;
+    margin: 0 10px;
+    color: #765643;
+}
+
+.login-button{
+    background: none;
+    color: #765643;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border: 3px solid #765643;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: 0.3s background-color;
+}
+
+.login-button:hover{
+    background-color: #765643;
+    color: white;
+    border: 3px solid #765643;
+}
+
+.navbar-toggler {
+    border: none;
+    font-size: 1.25rem;
+}
+
+.navbar-toggler:focus, .btn-close:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    transition: background-color 0.3s;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+  width: 0;
+  opacity: 0;
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.form-control.search-input {
+  background: #ffeedd;
+  border: 1px solid #765643;
+  padding: 0;
+}
+
+.search-active .search-input {
+  width: 200px;
+  opacity: 1;
+  padding-left: 10px;
+  padding-right: 30px; /* add some space for the close icon */
+}
+
+.search-icon, .close-icon {
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: #765643;
+}
+
+.close-icon {
+  display: none;
+  margin-left: 10px; /* add some space between the search icon and close icon */
+}
+
+.search-active .close-icon {
+  display: inline;
+}
+
+.search-active .search-icon {
+  display: none;
+}
+
+.search-icon-inside {
+  position: absolute;
+  right: 35px; /* adjust the value to position the icon correctly */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px; /* adjust the font size to your liking */
+  color: #aaa; /* adjust the color to your liking */
+  pointer-events: none; /* prevent the icon from receiving click events */
+  opacity: 0; /* hide the icon by default */
+  transition: opacity 0.2s ease-in-out;
+}
+
+.search-active .search-icon-inside {
+  opacity: 1; /* show the icon when search input is toggled */
+}
+
+#search-results {
+  height: 40px;
+  margin-top: 10px; /* add some space between the search input and results */
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+  display: none; /* hide the results container by default */
+  font-size: 14px; /* adjust the font size to your liking */
+  color: #666; /* adjust the color to your liking */
+}
+.search-results p{
+  margin-bottom: 0;
+}
+  
+@media (min-width: 991px) {
+    .nav-link::before{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background-color: #473428;
+        visibility: hidden;
+        transition: 0.3s ease-in-out;
+    }
+
+    .nav-link:hover::before, .nav-link.active::before{
+        width: 100%;
+        visibility: visible;
+    }
+}
+
+@media (max-width: 768px) {
+    .icon-box {
+        width: 35px;
+        height: 35px;
+    }
+    .search-icon, .close-icon {
+        font-size: 1rem;
+    }
+}
+
+.nav-link{
+    color: #765643;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active{
+    color: #473428;
+}
+
+/* Account Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    padding: 10px;
+}
+
+.dropdown-item {
+    color: #473428;
+}
+
+.dropdown-item:hover {
+    background-color: #ffeedd;
+}
+
+/* main section  */
+.container-body .login{
+    height: 55px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    size: 30px;  
+}
+.container-body .Shipping_Address a{
+    color: black;
+}
+.container-body  .information{
+    width: 100%;
+    position: relative;
+    margin-top: 2px;
+    background-color: rgb(228, 225, 222);
+}
+.container-body  .row{
+    display: flex;
+}
+.container-body  .label{
+    margin-left: 5px;
+    padding-top: 8px;
+    justify-self: unset;
+}
+.container-body  .payment_body{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2px;
+    flex-wrap: wrap;
+}
+.container-body  form .input-field{
+    display: flex;
+    width: calc(100% / 2 - 25px);
+    flex-direction: column;
+}
+.container-body  .payment_body button{
+    margin-top: 20px;
+}
+.container-body .order_details{
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+}
+.container-body  .exp_delivery{
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+}
+</style>
+
+<body>
+
+<!-- navbar starts  -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-center flex-grow-1 pe-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="collection.html">Collections</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+
+                <!-- Login Button (will be replaced after login) -->
+                <a href="login.html" class="btn login-button" id="loginButton">Login</a>
+
+                <!-- Account Icon with Dropdown (hidden initially) -->
+                <div class="dropdown d-none" id="accountDropdown">
+                    <a href="#" class="icon-box" id="accountIcon" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountIcon">
+                        <li><a class="dropdown-item" href="profile.html"><i class="fa-solid fa-circle-user" style="margin-right: 10px;"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="account.html"><i class="fa-solid fa-house-user" style="margin-right: 10px;"></i>Account</a></li>
+                        <li><a class="dropdown-item" href="checkout.html"><i class="fa-solid fa-boxes-packing" style="margin-right: 10px;"></i>Orders</a></li>
+                        <li><a class="dropdown-item" href="wishlist.html"><i class="fa-solid fa-heart" style="margin-right: 10px;"></i>Wishlist</a></li>
+                        <li><a class="dropdown-item" href="cart.html"><i class="fa-solid fa-cart-flatbed" style="margin-right: 10px;"></i>Cart</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear" style="margin-right: 10px;"></i>Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="userLogout()">Logout</a></li>
+                    </ul>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center">
+                    <!-- Search -->
+                    <div class="d-flex align-items-center search-container me-1">
+                      <i class="fas fa-search search-icon" onclick="toggleSearch()"></i>
+                      <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" id="search-input">
+                      <i class="fas fa-times close-icon ms-2" onclick="toggleSearch()"></i>
+                      <i class="fas fa-search search-icon-inside" aria-hidden="true"></i>
+                    </div>
+
+                    <!-- Wishlist -->
+                    <div class="icon-box">
+                        <a href="wishlist.html"><i class="fa-solid fa-heart"></i></a>
+                    </div>
+                    <!-- Cart -->
+                    <div class="icon-box">
+                        <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="search-results" id="search-results"></div>
+
+  <!-- navbar ends  -->
+
+<!-- main section  -->
+
+<div class="container-fluid shadow " style="border: 2px solid #765643; border-radius: 5px; margin: 10px 0;">
+    <h2 class="text-center m-2">Checkout</h2>
+</div>
+
+    <div class="container-body">
+        <div class="rows">
+            <div class="col-md-9 col-12 mx-auto">
+                <div class="row mt-5 gx-2">
+                    <div class="col-md-11 col-lg-8 col-9 mx-auto section_1 mb-lg-3 mb-3">
+                        <div class="login shadow">
+                            <p class="ml-3 p-2">1. Login/Register</p>
+                            <i class="m-lg-3 m-md-3 m-sm-1 "><span class="material-symbols-outlined">
+                                check_circle
+                            </span></i>
+                        </div>
+                        <div class="Shipping_Address mt-2 shadow">
+                            <div class="card ">
+                                <div class="card-body">
+                                    <a class="d-flex justify-content-between text-decoration-none" data-toggle="collapse" href="#AddressExample" aria-expanded="false" aria-controls="AddressExample" onclick="initial_form_hide()">
+                                        2. Shipping Address
+                                        <span><i class="fas fa-chevron-circle-down pt-1"></i></span>
+                                    </a>
+                                    <div class="collapse justify-content-between" id="AddressExample">
+                                    <!-- Data display section -->
+                                     <div class="mt-5" id="savedData">
+                                     </div>
+                                    <!-- Edit button section -->
+                                    <button id="editButton" class="btn btn-primary btn-sm mt-3" onclick="edit_hide()">Edit</button>
+        
+                                    <form id="inputForm">
+                                        <label for="email"></label>
+                                        <input type="text" name="email" id="email" placeholder="Enter your  email" class="form-control " required><br>
+        
+                                        <label for="ph_no"></label>
+                                        <input type="number" name="ph_no" id="ph_no" placeholder="Enter Phone Number" class="form-control " required><br>
+        
+                                        <label for="A_ph_no"></label>
+                                        <input type="number" name="A_ph_no" id="A_ph_no" placeholder="Enter Alternative Phone Number"  class="form-control " required><br>
+                                    
+                                        <label for="Address"></label>
+                                        <input type="text" name="address" id="Address" placeholder="Enter your Location" class="form-control " required><br>
+                                    
+                                    <button class="btn btn-primary ml-3" id="savebutton" type="submit" onclick="hide_form()">Save </button>
+                                </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="information shadow">
+                            <div class="mt-2 login">
+                                <p class="ml-3 p-2">3. Payment</p>
+                                <i class="m-lg-3 m-md-3 m-sm-1 "><span class="material-symbols-outlined">
+                                    check_circle
+                                </span></i>
+                            </div>
+                            <div class="ml-3 pt-3" style="padding: 20px;">
+                                <h6>Cards Accepted :</h6>
+                                <span>
+                                    <i class="fa-brands fa-cc-paypal" style="font-size: 2.5em; margin-left: 28px;"></i>
+                                    <i class="fa-regular fa-credit-card" style="font-size: 2.5em; margin-left: 15px;"></i>
+                                    <i class="fa-brands fa-cc-visa" style="font-size: 2.5em; margin-left: 15px;"></i>
+                                    <i class="fa-brands fa-google-pay" style="font-size: 2.5em; margin-left: 15px;"></i>
+                                </span>
+                            </div >
+                            
+                            <form class="ml-4 pt-3 pr-3" style="padding: 20px;">
+                                <div class="payment_body ">
+                                    <div class="input-field">
+                                        <label for="card_name">Name On Card :</label>
+                                        <input type="text" name="card_name" id="card_name" placeholder="Enter your  Name" required>
+                                    </div>
+    
+                                    <div class="input-field">
+                                        <label for="card_number" >Credit Card Number :</label>
+                                        <input type="card_number" name="card_number" id="card_number" placeholder="Enter Card Number"  required>
+                                    </div>
+    
+                                    <div class="input-field">
+                                        <label for="Exp. Month">Exp. Month :</label>
+                                        <input type="text" name="exp_mon" id="emp_mon" placeholder="eg.August" required>
+                                    </div>
+    
+                                    <div class="input-field">
+                                        <label for="exp_yr">Exp. Year :</label>
+                                        <input type="text" name="exp_yr" id="exp_yr" placeholder="eg.2025" required>
+                                    </div>
+    
+                                    <div class="input-field">
+                                        <label for="cvv">CVV :</label>
+                                        <input type="text" name="cvv" id="cvv" placeholder="eg.124" required>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-4 mb-3 shadow"  type="submit"> Submit </button>
+                            </form>
+                        </div>
+                    </div>
+                        <div class="col-md-11 col-lg-4 col-9 section_2 mx-auto mb-lg-0 mb-5">
+                            <div class="order_details shadow">
+                                <div class="payment-details">
+                                    <h4>Total Amount</h4>
+                                    <div class="price">
+                                      <p>Product Amount: ₹<span id="productAmount"></span></p>
+                                    </div>
+                                    <div class="price">
+                                      <p>Shipping Charge: ₹<span id="shippingCharge">50</span></p>
+                                    </div>
+                                    <hr>
+                                    <div class="total_amt">
+                                      <p>Payable Amount (including VAT): ₹<span id="totalAmount"></span></p>
+                                    </div>
+                                    <button id="rzp-button" class="btn btn-primary" type="button">Pay Now</button>
+                                  </div>
+                            </div>
+                            <div class="discount_code mt-2 shadow">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a class="d-flex justify-content-between" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            Add a Discount Code(optional)
+                                            <span><i class="fas fa-chevron-circle-down pt-1"></i></span>
+                                        </a>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="mt-3">
+                                                <input type="text" name="code" id="discount_code1" class="form-control font-weight-bold" placeholder="enter your discount code">
+                                                
+                                            </div>
+                                            <button class="btn btn-primary btn-sm mt-3" onlick="discount_code()">Apply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="exp_delivery mt-2 shadow">
+                                <h6 class="font-weight-bold">Expected Delivery Date :</h6>
+                                <p>05-12 September 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Load saved data when the page loads
+        function loadSavedData() {
+            const email = localStorage.getItem('email');
+            const ph_no = localStorage.getItem('ph_no');
+            const A_ph_no = localStorage.getItem('A_ph_no');
+            const Address = localStorage.getItem('Address');
+
+                document.getElementById('savedData').innerHTML = `
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Phone no:</strong> ${ph_no}</p>
+                    <p><strong>Alternative Phone no:</strong> ${A_ph_no}</p>
+                    <p><strong>Address:</strong> ${Address}</p>
+                `;
+        }
+
+        // Save data to localStorage and update visibility
+        document.getElementById('inputForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Collect form data
+            const email = document.getElementById('email').value;
+            const ph_no = document.getElementById('ph_no').value;
+            const A_ph_no = document.getElementById('A_ph_no').value;
+            const Address = document.getElementById('Address').value;
+
+            // Save data to localStorage
+            localStorage.setItem('email', email);
+            localStorage.setItem('ph_no', ph_no);
+            localStorage.setItem('A_ph_no', A_ph_no);
+            localStorage.setItem('Address', Address);
+
+            alert('Shipping Address is successfully saved!');
+            
+            // Update the UI to reflect the saved data
+            loadSavedData();
+            
+        });
+
+        // Show the form and hide the edit button
+        document.getElementById('editButton').addEventListener('click', function() {
+            document.getElementById('inputForm').classList.remove('hidden');
+            document.getElementById('editButton').classList.remove('hidden');
+            document.getElementById('savedData').innerHTML = ''; // Clear displayed data
+        });
+        function hide_form(){
+            document.getElementById('inputForm').style.display="none";
+            document.getElementById('editButton').style.display="block";
+        }
+        function edit_hide() {
+            document.getElementById('editButton').style.display="none"
+            document.getElementById('inputForm').style.display="block";
+        }
+        function initial_form_hide(){
+            document.getElementById('inputForm').style.display="none";
+        }
+        // Load saved data when the page is loaded
+        window.onload = loadSavedData;
+    </script>
+
+    <script>
+        window.onload = function() {
+    // Get the price from the query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const price = parseFloat(urlParams.get('price'));
+
+    // Define the shipping charge
+    const shippingCharge = 50;
+
+    // Calculate the total amount
+    const totalAmount = price + shippingCharge;
+
+    // Update the UI with the calculated amounts
+    document.getElementById('productAmount').textContent = price.toFixed(2);
+    document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+  };
+</script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  window.onload = function() {
+    // Get the price from the query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const price = parseFloat(urlParams.get('price'));
+
+    // Define the shipping charge
+    const shippingCharge = 50;
+
+    // Calculate the total amount
+    const totalAmount = price + shippingCharge;
+
+    // Update the UI with the calculated amounts
+    document.getElementById('productAmount').textContent = price.toFixed(2);
+    document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+
+    // Razorpay payment integration
+    document.getElementById('rzp-button').onclick = function(e) {
+      e.preventDefault();
+      var options = {
+        "key": "rzp_test_LOQW4a93WLPyup", // Replace with your Razorpay Key ID
+        "amount": totalAmount * 100, // Amount in paise (50000 paise = 500 INR)
+        "currency": "INR",
+        "name": "Payment",
+        "description": "E-Commerce Site",
+        "image": "./img/logo.png", // Optional
+        "handler": function (response){
+          alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+          window.location = 'success.html';
+        },
+        "prefill": {
+          // "name": "Your Name",
+          // "email": "your-email@example.com",
+          // "contact": "9999999999"
+        },
+        "theme": {
+          "color": "#013435"
+        }
+      };
+      var paymentObject = new Razorpay(options);
+      paymentObject.open();
+    };
+  };
+</script>
+
+<!-- custom js -->
+<script>
+    function toggleSearch() {
+    const searchContainer = document.querySelector('.search-container');
+    searchContainer.classList.toggle('search-active');
+  }
+  
+  const items = [
+    { name: 'Item 1', anchor: '#item-1' },
+    { name: 'Item 2', anchor: '#item-2' },
+    { name: 'Item 3', anchor: '#item-3' },
+    { name: 'Item 4', anchor: '#item-4' },
+    { name: 'Item 5', anchor: '#item-5' },
+    // Add more items to the array
+  ];
+  
+  document.getElementById('search-input').addEventListener('input', searchItems);
+  
+  function searchItems() {
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    const searchResults = document.getElementById('search-results');
+  
+    let results = [];
+  
+    items.forEach(item => {
+      if (item.name.toLowerCase().includes(searchTerm)) {
+        results.push(item);
+      }
+    });
+  
+    if (results.length === 0) {
+      searchResults.innerHTML = '<p>No results found for "' + searchTerm + '".</p>';
+      searchResults.style.display = 'block';
+    } else {
+      searchResults.style.display = 'none';
+    }
+  }
+  
+  document.getElementById('search-input').addEventListener('keyup', function(event) {
+    if (event.key === 'Escape') {
+      document.getElementById('search-input').value = '';
+      document.getElementById('search-results').style.display = 'none';
+    }
+  });
+
+
+/*   // for api use
+
+// Add event listener to search input
+document.getElementById('search-input').addEventListener('input', searchItems);
+
+function searchItems() {
+  const searchInput = document.getElementById('search-input');
+  const searchTerm = searchInput.value.trim();
+  const searchResults = document.getElementById('search-results'); // Add a div with this ID to display results
+
+  if (searchTerm !== '') {
+    // Make an API call to search for the item (replace with your actual API endpoint)
+    fetch('/api/search', {
+      method: 'GET',
+      params: { query: searchTerm }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.length === 0) {
+        // Display "No results found" message
+        searchResults.innerHTML = '<p>No results found for "' + searchTerm + '".</p>';
+      } else {
+        // Display search results
+        searchResults.innerHTML = '';
+        data.forEach(item => {
+          const resultHTML = '<p>' + item.name + '</p>';
+          searchResults.insertAdjacentHTML('beforeend', resultHTML);
+        });
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  } else {
+    searchResults.innerHTML = ''; // Clear results when search input is empty
+  }
+} 
+  
+*/
+
+  // Check login state on page load
+  document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (isLoggedIn === 'true') {
+          document.getElementById('loginButton').classList.add('d-none');
+          document.getElementById('accountDropdown').classList.remove('d-none');
+      }
+  });
+
+  // Simulate user logout
+  function userLogout() {
+      // Set login state to false
+      localStorage.setItem('isLoggedIn', 'false');
+      // Show the login button
+      document.getElementById('loginButton').classList.remove('d-none');
+      // Hide the account dropdown
+      document.getElementById('accountDropdown').classList.add('d-none');
+  }
+</script>
+
+<!-- bootstrap js  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

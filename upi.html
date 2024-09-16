@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<style>
+            *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: sans-serif;
+            background-color: #ffeedd;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #765643;
+            color: white;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+
+        .sidebar h4, ul, li{
+            margin: 20px 10px;
+            cursor: pointer;
+        }
+
+        .sidebar li{
+            cursor: pointer;
+        }
+
+        /* sidebar ends  */
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .profile-section {
+            justify-content: center;
+            margin-top: 20px 0px;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+        }
+
+        .profile-image i {
+            color: #fff;
+        }
+
+        .edit-profile {
+            margin: 20px 0px;
+            padding: 5px 10px;
+            background-color: #b29079;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .account-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .account-item {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .account-item i {
+            font-size: 24px;
+            color: #b29079;
+            margin-bottom: 10px;
+        }
+
+        .account-item h3 {
+            margin: 0;
+        }
+
+        .logout-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #b29079;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .account-menu ul {
+            list-style: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .account-menu li {
+            padding: 5px 0;
+            cursor: pointer;
+        }
+
+        .account-menu li:hover, .account-menu .active {
+            color: #b07c59;
+            cursor: pointer;
+        }
+
+
+        /* profile.html view section  */
+
+        
+        .profile-content {
+            flex: 1;
+            margin: 0 20px;
+            padding: 40px;
+            background-color: #ffeedd;
+        }
+
+        .profile-content h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .profile-details {
+            margin-bottom: 20px;
+        }
+
+        .profile-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .label {
+            font-weight: 500;
+        }
+
+        .value {
+            color: #777;
+        }
+
+        .edit-input {
+            display: none;
+            width: 60%;
+            padding: 5px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .edit-input:focus {
+            border-color: #ae917f;
+        }
+
+        /* Edit button styles */
+        .edit-button,
+        .save-button {
+            display: block;
+            width: 100px;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #ae917f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .edit-button:hover,
+        .save-button:hover {
+            background-color: #765643;
+        }
+
+        .save-button {
+            display: none;
+        }
+
+        /* credit card section  */
+        .credit {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffeedd;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .credit-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .credit-header img {
+            height: 100px;
+        }
+
+        .credit-header h1 {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .benefits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .benefit-item {
+            width: 45%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .benefit-item i {
+            font-size: 2em;
+            color: #765643;
+            margin-right: 15px;
+        }
+
+        .benefit-item p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        .balance-section {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .balance-section h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .balance-section .actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .credit .actions button {
+            width: 150px;
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: 1px solid #765643;
+            background-color: #f6f5ec;
+            color: #765643;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .credit .actions button:hover {
+            background-color: #765643;
+            color: #fff;
+        }
+
+        .transaction-log,
+        .credit-details {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .transaction-log .title,
+        .credit-details .title {
+            font-weight: bold;
+            color: #765643;
+        }
+
+        .transaction-log .icon,
+        .credit-details .icon {
+            font-size: 1.5em;
+            color: #765643;
+        }
+
+        .notes {
+            padding: 20px;
+        }
+
+        .notes p {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .credit .footer-links {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .credit .footer-links a {
+            color: #765643;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        .credit .footer-links a:hover {
+            border: 1px solid #765643;
+            padding: 10px 5px;
+        }
+
+        /* delete Account view  */
+
+        .delete-content {
+            width: 75%;
+            padding: 20px;
+        }
+    
+        .delete-content h2 {
+            text-align: center;
+            color: #765643;
+            margin-top: 0;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    
+        .delete-content .text{
+            padding: 20px;
+        }
+    
+        .delete-content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+    
+        .delete-content ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+    
+        .delete-content li {
+            margin-bottom: 10px;
+        }
+    
+        .delete-content .image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    
+        .delete-content img {
+            width: 200px;
+            height: auto;
+        }
+    
+        .delete-content .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    
+        .delete-content .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+    
+        .delete-content .buttons button.delete {
+            background-color: #f44336;
+            color: #fff;
+        }
+    
+        .delete-content .buttons button.keep {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+    
+        .delete-content .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+    
+        .delete-content .navigation .arrow {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* card view css  */
+        .card-content {
+            width: 75%;
+            padding: 20px;
+            text-align: center;
+        }
+    
+        .card-content h2 {
+            text-align: center;
+            color: #765643;
+            margin-top: 0;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    
+        .card-content .text{
+            padding: 20px;
+        }
+    
+        .card-content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* UPI view css  */
+        .UPI-content {
+            width: 75%;
+            padding: 20px;
+            text-align: center;
+        }
+    
+        .UPI-content h2 {
+            text-align: center;
+            color: #765643;
+            margin-top: 0;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    
+        .UPI-content .text{
+            padding: 20px;
+        }
+    
+        .UPI-content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        
+</style>
+
+<body>
+    <div class="container">
+        <!-- sidebar starts  -->
+        <div class="sidebar">
+            <h3>Account</h3>
+            <hr>
+            <h4 id="OverviewLink">Overview</h4>
+            <hr>
+            <ul>
+                <a href="cart.html" style="text-decoration: none; color: white;"><li>Orders & Returns</li></a>
+                <a href="wishlist.html" style="text-decoration: none; color: white;"><li>Wishlist</li></a>
+                <li id="CreditLink">Credits</li>
+            </ul>
+            <hr>
+            <ul>
+                <li id="ProfileLink">Profile</li>
+                <li id="CardLink">Saved Cards</li>
+                <li><a href="#" class="active" style="background-color: antiquewhite; color: #765643; padding: 5px 10px; border-radius: 50px; text-decoration: none;">Saved UPI</a></li>
+                <li id="DeleteLink">Delete Acct</li>
+            </ul>
+            <hr>
+            <h4>Legal</h4>
+            <ul>
+                <li>Terms of Use</li>
+                <li>Privacy Policy</li>
+            </ul>
+        </div>
+        <!-- sidebar ends  -->
+
+        <!-- account overview section starts  -->
+        <div class="UPI-content">
+            <h2>Saved UPI</h2>
+            <div class="image">
+              <img src="https://cdni.iconscout.com/illustration/premium/thumb/money-transfer-with-help-of-mobile-wallet-3323734-2791563.png">
+            </div>
+            <div class="text">
+                <h2>No Saved UPI is here! Wanna save new UPI?</h2>
+                <p>- visit cart to proceed -</p>
+            </div>
+        </div>
+
+    <!-- Redirect to other page script -->
+    <script>
+        document.getElementById("OverviewLink").addEventListener("click", function() {
+            window.location.href = "account.html";
+        });
+        document.getElementById("ProfileLink").addEventListener("click", function() {
+            window.location.href = "profile.html";
+        });
+        document.getElementById("CreditLink").addEventListener("click", function() {
+            window.location.href = "credit.html";
+        });
+        document.getElementById("DeleteLink").addEventListener("click", function() {
+            window.location.href = "delete.html";
+        });
+        document.getElementById("CardLink").addEventListener("click", function() {
+            window.location.href = "card.html";
+        });
+    </script>
+</body>
+</html>
